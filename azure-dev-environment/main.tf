@@ -43,7 +43,7 @@ resource "azurerm_local_network_gateway" "hetzner-lgw" {
   location            = azurerm_resource_group.common-resource-group.location
   resource_group_name = azurerm_resource_group.common-resource-group.name
   gateway_address     = "65.109.95.102"
-  address_space       = ["10.1.1.69/32"]
+  address_space       = ["10.1.1.0/24"]
 }
 
 
@@ -75,6 +75,7 @@ resource "azurerm_virtual_network_gateway_connection" "cn-hetzner" {
 
 
 ######Peering###########
+###Need to add allow vnetgw usage config on peerings (https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering#use_remote_gateways-1) #########
 resource "azurerm_virtual_network_peering" "vpngw-to-vm-peer" {
   name                      = "vpngw-to-vm-peer"
   resource_group_name       = azurerm_resource_group.common-resource-group.name
